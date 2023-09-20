@@ -31,3 +31,16 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
+
+
+class Contacts(models.Model):
+    contact_name = models.CharField(max_length=100, verbose_name='Имя')
+    ph_number = models.IntegerField(verbose_name='Телефоный номер')
+    message = models.TextField(verbose_name='Сообщение')
+
+    def __str__(self):
+        return f'{self.contact_name}: {self.ph_number} - {self.message}'
+
+    class Meta:
+        verbose_name = 'контакт'
+        verbose_name_plural = 'контакты'

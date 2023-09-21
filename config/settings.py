@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'catalog',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -131,6 +131,15 @@ STATICFILES_DIRS = (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = (
-    BASE_DIR / 'media',
-)
+MEDIA_ROOT = BASE_DIR / 'media'
+
+EMAIL_HOST = 'abvg.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = 'bolokan2014@gmail.com'
+EMAIL_HOST_PASSWORD = 'Tankist23001'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+SERVER_EMAIL = 'bolokan2014@gmail.com'
+DEFAULT_FROM_EMAIL = 'bolokan2014@gmail.com'
+

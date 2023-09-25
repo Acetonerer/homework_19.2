@@ -1,11 +1,10 @@
 from django.db import models
 
-
 NULLABLE = {"blank": True, "null": True}
 
 
 class Product(models.Model):
-    product_name = models.CharField(max_length=100, verbose_name='Название')
+    product_name = models.CharField(max_length=100, verbose_name='Наименование')
     descriptions = models.TextField(verbose_name='Описание')
     picture = models.ImageField(upload_to='product/', verbose_name='Изображение', **NULLABLE)
     category = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='Категория')
@@ -14,11 +13,25 @@ class Product(models.Model):
     date_update = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
 
     def __str__(self):
-        return f'{self.product_name}: {self.descriptions}, {self.category}'
+        return f'{self.product_name}: {self.category}'
 
     class Meta:
         verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
+
+
+class Version(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Продукт')
+    number_version = models.CharField(max_length=50, verbose_name='Номер версии')
+    name_version = models.CharField(max_length=100, verbose_name='Название версии')
+    is_active = models.BooleanField(default=True, verbose_name='Активна')
+
+    def __str__(self):
+        return f'{self.product}: {self.number_version}({self.is_active}) - {self.name_version}'
+
+    class Meta:
+        verbose_name = 'версия'
+        verbose_name_plural = 'версии'
 
 
 class Category(models.Model):
@@ -35,7 +48,7 @@ class Category(models.Model):
 
 class Contacts(models.Model):
     contact_name = models.CharField(max_length=100, verbose_name='Имя')
-    ph_number = models.IntegerField(verbose_name='Телефоный номер')
+    ph_number = models.CharField(max_length=100, verbose_name='Телефоный номер')
     message = models.TextField(verbose_name='Сообщение')
 
     def __str__(self):

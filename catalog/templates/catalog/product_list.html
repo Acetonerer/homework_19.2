@@ -8,9 +8,6 @@
 <div class="col-12 mb-5">
     <a class="btn btn-outline-primary" href="{% url 'catalog:create' %}">Добавить товар</a>
 </div>
-<div class="col-12 mb-5">
-    <a class="btn btn-outline-success" href="{% url 'catalog:create_version' %}">Добавить версию</a>
-</div>
     <div class="row text-center">
     {% for product in page_obj %}
         <div class="col-3">
@@ -24,7 +21,7 @@
                     </ul>
                     <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
                     <a href="{% url 'catalog:view' product.pk %}" class="btn btn-lg btn-block btn-outline-primary">Подробнее о товаре</a>
-                    <a href="{% url 'catalog:view_version' pk=product.pk %}" class="btn btn-lg btn-block btn-outline-success">Версии</a>
+                    <a href="{% url 'catalog:edit' product.pk %}" class="btn btn-lg btn-block btn-outline-primary">Редактировать товар</a>
                 </div>
             </div>
         </div>
@@ -37,11 +34,9 @@
     <a href="?page=1">&laquo; первая</a>
     <a href="?page={{ page_obj.previous_page_number }}">предыдущая</a>
     {% endif %}
-
     <span class="current">
       Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
     </span>
-
     {% if page_obj.has_next %}
     <a href="?page={{ page_obj.next_page_number }}">следующая</a>
     <a href="?page={{ page_obj.paginator.num_pages }}">последняя &raquo;</a>
